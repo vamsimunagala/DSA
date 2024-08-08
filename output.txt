@@ -1,2 +1,1 @@
-The Largest Elemnent in arr1: 5
-The Largest Elemnent in arr2: 10
+2
