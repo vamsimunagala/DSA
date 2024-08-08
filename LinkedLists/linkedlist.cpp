@@ -2,7 +2,6 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-
 struct Node
 {
     int data;
@@ -18,7 +17,6 @@ struct Node
         next = next1;
     }
 };
-// print linked list
 void printLinkedList(Node *head)
 {
     Node *temp = head;
@@ -28,7 +26,6 @@ void printLinkedList(Node *head)
         temp = temp->next;
     }
 }
-// search an element in the linkedlist
 int checkIfPresent(Node *head, int value)
 {
     Node *temp = head;
@@ -42,7 +39,6 @@ int checkIfPresent(Node *head, int value)
     }
     return 0;
 }
-// size of the linkedlist
 int lengthOfLinkedList(Node *head)
 {
     Node *temp = head;
@@ -54,13 +50,6 @@ int lengthOfLinkedList(Node *head)
     }
     return cnt;
 }
-// insert new node at head
-Node *insertHead(Node *head, int value)
-{
-    Node *temp = new Node(value, head);
-    return temp;
-}
-// covert array into linkedlist
 Node* convert2arr(vector<int> &arr)
 {
     Node* head = new Node(arr[0]);
@@ -72,23 +61,69 @@ Node* convert2arr(vector<int> &arr)
         mover = temp;
     }
     return head;
-}
-// delete the head node 
+} 
 Node* removeHead(Node * head){
     Node * temp = head;
     head=head->next;
     free(temp);
     return head;
 }
+Node * removeTail(Node* head){
+    if(head==NULL || head->next==NULL) return NULL;
 
-// 
+    Node * temp = head;
 
+    while(temp->next->next!=NULL){
+        temp=temp->next;
+    }
+    free(temp->next);
+    temp->next=nullptr;
+    return head;
+}
+Node * removeEl(Node * head,int k){
+    if(head==NULL) return head;
+    if(k==1){
+        Node * temp = head;
+        head=head->next;
+        free(temp);
+        return head;
+    }  
+    int cnt=1;
+    Node * prev = NULL;
+    Node * temp = head;
+    while(temp!=NULL){
+        cnt++;
+        if(k==cnt-1){
+            prev->next=prev->next->next;
+            free(temp);
+            break;
+        }
+        prev = temp;
+        temp=temp->next;
+    }
+    return head;
+}
+Node * insertHead(Node* head,int val){
+    Node * temp = new Node(val,head);
+    return temp;
+    
+}
+Node * insertTail(Node * head,int val){
+    if(head==NULL) return head;
+    Node * temp = head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    Node *newNode = new Node(val);
+    temp->next=newNode;
+    return head;
+}
 int main()
 {
     vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8};
     Node* head = convert2arr(arr);
-    head = removeHead(head);
-    cout<<head->data;
+    head = insertTail(head,7);
+    printLinkedList(head);
 }
 
 
